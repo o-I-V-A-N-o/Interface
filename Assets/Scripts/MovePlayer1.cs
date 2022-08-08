@@ -57,5 +57,6 @@ public class MovePlayer1 : MonoBehaviour
     private void Pause()
     {
         _manager.GetComponent<GameManager>().Pause();
+        Debug.Log("user PAUSE");
     }
 }

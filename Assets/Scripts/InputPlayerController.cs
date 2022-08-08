@@ -206,34 +206,6 @@ public partial class @InputPlayerController : IInputActionCollection2, IDisposab
                     ""isPartOfComposite"": true
                 }
             ]
-        },
-        {
-            ""name"": ""Menu"",
-            ""id"": ""3195a683-7ab1-462f-9a08-bd91e9609995"",
-            ""actions"": [
-                {
-                    ""name"": ""Click"",
-                    ""type"": ""Button"",
-                    ""id"": ""3a47e372-7c67-49ab-bb39-a8e300e845e5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""1d500415-f952-4a6d-9f3d-15e80a46fab3"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Click"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": []
@@ -246,9 +218,6 @@ public partial class @InputPlayerController : IInputActionCollection2, IDisposab
         // Player2
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_Move = m_Player2.FindAction("Move", throwIfNotFound: true);
-        // Menu
-        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
-        m_Menu_Click = m_Menu.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -386,39 +355,6 @@ public partial class @InputPlayerController : IInputActionCollection2, IDisposab
         }
     }
     public Player2Actions @Player2 => new Player2Actions(this);
-
-    // Menu
-    private readonly InputActionMap m_Menu;
-    private IMenuActions m_MenuActionsCallbackInterface;
-    private readonly InputAction m_Menu_Click;
-    public struct MenuActions
-    {
-        private @InputPlayerController m_Wrapper;
-        public MenuActions(@InputPlayerController wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Click => m_Wrapper.m_Menu_Click;
-        public InputActionMap Get() { return m_Wrapper.m_Menu; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
-        public void SetCallbacks(IMenuActions instance)
-        {
-            if (m_Wrapper.m_MenuActionsCallbackInterface != null)
-            {
-                @Click.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnClick;
-                @Click.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnClick;
-                @Click.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnClick;
-            }
-            m_Wrapper.m_MenuActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Click.started += instance.OnClick;
-                @Click.performed += instance.OnClick;
-                @Click.canceled += instance.OnClick;
-            }
-        }
-    }
-    public MenuActions @Menu => new MenuActions(this);
     public interface IPlayer1Actions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -428,9 +364,5 @@ public partial class @InputPlayerController : IInputActionCollection2, IDisposab
     public interface IPlayer2Actions
     {
         void OnMove(InputAction.CallbackContext context);
-    }
-    public interface IMenuActions
-    {
-        void OnClick(InputAction.CallbackContext context);
     }
 }

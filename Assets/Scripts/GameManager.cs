@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject _pauseMenuUI;
+    [SerializeField]
+    private GameObject _optionsUI;
 
     public int Health = 5;
     public int Blocks = 0;
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
         if (GameIsPaused)
         {
             _pauseMenuUI.SetActive(false);
+            Options();
             Time.timeScale = 1f;
             GameIsPaused = false;
         }
@@ -44,6 +47,14 @@ public class GameManager : MonoBehaviour
             _pauseMenuUI.SetActive(true);
             Time.timeScale = 0f;
             GameIsPaused = true;
+        }
+    }
+
+    public void Options()
+    {
+        if (_optionsUI.activeSelf)
+        {
+            _optionsUI.SetActive(false);
         }
     }
 
