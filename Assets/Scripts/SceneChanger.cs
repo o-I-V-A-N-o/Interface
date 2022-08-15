@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,7 +6,7 @@ public class SceneChanger : MonoBehaviour
 {
     public void ChangeScene(string sceneName)
     {
-        Debug.Log("Load - " + sceneName);
+        Debug.Log("Load scene - " + sceneName);
         SceneManager.LoadScene(sceneName);
     }
     

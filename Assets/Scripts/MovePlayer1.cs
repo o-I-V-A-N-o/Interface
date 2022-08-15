@@ -21,7 +21,7 @@ public class MovePlayer1 : MonoBehaviour
         Move();
     }
 
-    public void Move()
+    private void Move()
     {
         var vector = control.Player1.Move.ReadValue<Vector2>();
         var movement = new Vector3(vector.x, 0, vector.y);
@@ -39,7 +39,7 @@ public class MovePlayer1 : MonoBehaviour
         }
     }
 
-    public void Shoot()
+    private void Shoot()
     {
         FindObjectOfType<MoveBall>().ICanMove = true;
     }
@@ -57,6 +57,5 @@ public class MovePlayer1 : MonoBehaviour
     private void Pause()
     {
         _manager.GetComponent<GameManager>().Pause();
-        Debug.Log("user PAUSE");
     }
 }

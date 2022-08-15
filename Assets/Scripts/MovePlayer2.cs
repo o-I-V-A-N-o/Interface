@@ -16,7 +16,7 @@ public class MovePlayer2 : MonoBehaviour
         Move();
     }
 
-    public void Move()
+    private void Move()
     {
         var vector = control.Player2.Move.ReadValue<Vector2>();
         var movement = new Vector3(vector.x, 0, vector.y);
@@ -32,11 +32,6 @@ public class MovePlayer2 : MonoBehaviour
                 collision.transform.GetComponent<MoveBall>().speed += 1;
             }
         }
-    }
-
-    public void Shoot()
-    {
-        FindObjectOfType<MoveBall>().ICanMove = true;
     }
 
     private void OnEnable()

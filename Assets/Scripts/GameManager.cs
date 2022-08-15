@@ -23,11 +23,8 @@ public class GameManager : MonoBehaviour
 
     public void ChangeHealth(int life)
     {
-        if (Health > 0)
-        {
-            Health -= life;
-        }
-        else
+        Health -= life;
+        if (Health <= 0)
         {
             EndGame();
         }
@@ -37,15 +34,14 @@ public class GameManager : MonoBehaviour
     {
         if (GameIsPaused)
         {
-            _pauseMenuUI.SetActive(false);
-            Options();
+            _pauseMenuUI.GetComponent<Animator>().SetTrigger("Close");
             Time.timeScale = 1f;
             GameIsPaused = false;
         }
         else
         {
-            _pauseMenuUI.SetActive(true);
             Time.timeScale = 0f;
+            _pauseMenuUI.GetComponent<Animator>().SetTrigger("Open");
             GameIsPaused = true;
         }
     }
@@ -58,7 +54,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void EndGame()
+    private void EndGame()
     {
         Debug.Log("Конец игры!");
         EditorApplication.isPaused = true;
